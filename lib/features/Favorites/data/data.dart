@@ -1,3 +1,4 @@
-export 'datasources/datasources.dart';
+export 'datasources/local_datasource/favorites_datasources.dart';
 export 'repositories/repositories.dart';
-export 'services/services.dart';
+export 'models/favourite_model.dart';
+export 'datasources/local_datasource/favorites_helper.dart';
