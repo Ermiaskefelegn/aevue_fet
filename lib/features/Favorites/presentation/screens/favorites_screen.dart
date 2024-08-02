@@ -26,6 +26,7 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Text('Favorites'),
       ),
       backgroundColor: Colors.white,
@@ -65,9 +66,6 @@ class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
                                       .toStringAsFixed(2),
                                   description: "",
                                 ),
-                                const Divider(
-                                  color: Colors.grey,
-                                )
                               ],
                             );
                           }),

@@ -15,6 +15,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isInitialized = false;
     final searchQuery = ref.watch(searchQueryProvider);
     final productsAsyncValue = ref.watch(productProvider);
     final debouncedProductsAsyncValue = ref.watch(debouncedSearchProvider);
@@ -22,6 +23,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!isInitialized) {
+        ref.watch(favoriteProvider.notifier).getitems();
+        isInitialized = true;
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
