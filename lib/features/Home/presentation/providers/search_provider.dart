@@ -1,36 +1,29 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:dio/dio.dart';
 import 'dart:async';
 
-import '../../Home.dart';
+import '../../home.dart';
 
 final searchQueryProvider = StateProvider<String>((ref) => '');
+
+final searchProductsProvider = Provider(
+  (ref) => SearchProducts(ref.watch(productRepositoryProvider)),
+);
 
 final debouncedSearchProvider =
     StreamProvider.autoDispose<List<Product>>((ref) {
   const debounceDuration = Duration(milliseconds: 500);
+  final searchProducts = ref.watch(searchProductsProvider);
   final streamController = StreamController<List<Product>>();
 
   Timer? debounceTimer;
 
-  void searchProducts(String query) async {
+  void searchProductsHandler(String query) async {
     if (query.isEmpty) {
       streamController.add([]);
       return;
     }
     try {
-      final response =
-          await Dio().get('https://dummyjson.com/products/search?q=$query');
-      final productModel = ProductModel.fromJson(response.data);
-      final List<Product> products = productModel.products!
-          .map((productData) => Product(
-                id: productData.id!,
-                title: productData.title!,
-                description: productData.description!,
-                price: productData.price!,
-                image: productData.thumbnail!,
-              ))
-          .toList();
+      final products = await searchProducts(query);
       streamController.add(products);
     } catch (e) {
       streamController.addError(e);
@@ -41,7 +34,7 @@ final debouncedSearchProvider =
     if (debounceTimer?.isActive ?? false) {
       debounceTimer?.cancel();
     }
-    debounceTimer = Timer(debounceDuration, () => searchProducts(query));
+    debounceTimer = Timer(debounceDuration, () => searchProductsHandler(query));
   }
 
   ref.listen<String>(searchQueryProvider, (_, next) {

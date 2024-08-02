@@ -4,21 +4,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../presentation.dart';
 
 class FavoriteScreen extends ConsumerStatefulWidget {
-  FavoriteScreen({super.key});
-  bool isInitialized = false;
+  const FavoriteScreen({super.key});
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _FavoriteScreenState();
 }
 
 class _FavoriteScreenState extends ConsumerState<FavoriteScreen> {
+  bool isInitialized = false;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!widget.isInitialized) {
+      if (isInitialized) {
         ref.watch(favoriteProvider.notifier).getitems();
-        widget.isInitialized = true;
+        isInitialized = true;
       }
     });
     final favoriteState = ref.watch(favoriteProvider).favoriteItems;

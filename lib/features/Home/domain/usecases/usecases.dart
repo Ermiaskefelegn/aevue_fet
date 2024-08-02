@@ -10,3 +10,13 @@ class FetchProducts {
     return repository.fetchProducts(query);
   }
 }
+
+class SearchProducts {
+  final ProductRepository repository;
+
+  SearchProducts(this.repository);
+
+  Future<List<Product>> call(String query) {
+    return repository.searchProducts(query);
+  }
+}

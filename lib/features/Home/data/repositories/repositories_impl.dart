@@ -20,4 +20,19 @@ class ProductRepositoryImpl implements ProductRepository {
             .toList() ??
         [];
   }
+
+  @override
+  Future<List<Product>> searchProducts(String query) async {
+    final productModel = await remoteDataSource.searchProducts(query);
+    return productModel.products
+            ?.map((productData) => Product(
+                  id: productData.id!,
+                  title: productData.title!,
+                  description: productData.description!,
+                  price: productData.price!,
+                  image: productData.thumbnail!,
+                ))
+            .toList() ??
+        [];
+  }
 }

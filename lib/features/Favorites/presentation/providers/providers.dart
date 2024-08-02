@@ -1,7 +1,7 @@
-import 'package:aevue_fet/features/Home/Home.dart';
+import 'package:aevue_fet/features/Home/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Favorites.dart';
+import '../../favorites.dart';
 
 final favoriteRepositoryProvider = Provider<FavoriteRepository>((ref) {
   return FavoriteRepository(

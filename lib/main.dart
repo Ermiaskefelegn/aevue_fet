@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'features/Favorites/Favorites.dart';
-import 'features/Home/Home.dart';
+import 'features/Favorites/favorites.dart';
+import 'features/Home/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +43,7 @@ class MainPageState extends State<MainPage> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    FavoriteScreen(),
+    const FavoriteScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -59,6 +59,7 @@ class MainPageState extends State<MainPage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

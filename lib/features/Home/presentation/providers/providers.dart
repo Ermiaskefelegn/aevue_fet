@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Home.dart';
+import '../../home.dart';
 
 final productProvider = FutureProvider<List<Product>>((ref) async {
   final getProducts = ref.watch(getProductsProvider);
