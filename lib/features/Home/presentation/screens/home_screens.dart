@@ -23,7 +23,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text('Home'),
